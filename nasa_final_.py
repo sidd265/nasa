@@ -12,6 +12,7 @@ import pandas as pd
 import requests
 import matplotlib.pyplot as plt
 import streamlit as st
+import seaborn as sns
 
 # Tickers and date range
 tickers = ['XOM', 'NEE', 'ENPH', 'AAPL', 'MSFT']
