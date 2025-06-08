@@ -7,10 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1a0y_ZZBdMYv6NWE1iVHv6DNwNZgnA0Jk
 """
 
-!pip install streamlit --quiet
-
-!pip install pyngrok --quiet
-
 import yfinance as yf
 import pandas as pd
 import requests
