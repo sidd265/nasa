@@ -62,18 +62,19 @@ st.markdown("Visualize the impact of NASA-detected solar events on stock perform
 selected_tickers = st.multiselect("Select tickers:", tickers, default=['XOM', 'NEE'])
 show_only_events = st.checkbox("Show only solar event days", value=False)
 
+palette = sns.color_palette("tab10", len(selected_tickers))
 data = price_data[selected_tickers]
 if show_only_events:
     data = data[price_data['solar_event'] == 1]
 
 fig, ax = plt.subplots(figsize=(12,6))
-for ticker in selected_tickers:
-    ax.plot(data.index, data[ticker], label=ticker)
-    if not show_only_events:
+for idx, ticker in enumerate(selected_tickers):
+    ax.plot(data.index, data[ticker], label=ticker, color=palette[idx])
+
+if not show_only_events:
     event_dates = price_data[price_data['solar_event'] == 1].index
-    average_price = data.mean(axis=1)
-    ax.scatter(event_dates, average_price.loc[event_dates],
-               color='red', marker='x', label='Solar Event')
+    avg_series = data.mean(axis=1)
+    ax.scatter(event_dates, avg_series.loc[event_dates], color='black', marker='x', label='Solar Event')
 
 
 ax.set_title("Stock Prices with NASA Solar Events")
