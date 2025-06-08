@@ -69,9 +69,12 @@ if show_only_events:
 fig, ax = plt.subplots(figsize=(12,6))
 for ticker in selected_tickers:
     ax.plot(data.index, data[ticker], label=ticker)
-    if not show_only_events:
-        event_dates = price_data[price_data['solar_event'] == 1].index
-        ax.scatter(event_dates, price_data.loc[event_dates, ticker], color='red', marker='x', label='Solar Event' if ticker == selected_tickers[0] else "")
+   if not show_only_events:
+    event_dates = price_data[price_data['solar_event'] == 1].index
+    average_price = data.mean(axis=1)
+    ax.scatter(event_dates, average_price.loc[event_dates],
+               color='red', marker='x', label='Solar Event')
+
 
 ax.set_title("Stock Prices with NASA Solar Events")
 ax.set_xlabel("Date")
